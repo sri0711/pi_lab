@@ -10,10 +10,10 @@ echo "Stopping and removing old containers..."
 docker-compose down
 
 echo "Removing unused Docker containers..."
-sudo docker rm -f $(sudo docker ps -a -q)
+docker container prune -f
 
 echo "Removing unused Docker images..."
-docker rmi -f $(sudo docker ps -a -q)
+docker image prune -f
 
 echo "Fetching the latest code from Git..."
 git pull origin main  # Or the appropriate branch name
