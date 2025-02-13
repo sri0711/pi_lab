@@ -11,7 +11,9 @@ services:
     networks:
       - backend
     environment:
-      - REACT_APP_API_URL=http://server:3001
+      - NODE_SERVER=http://server:3001
+    volumes:
+      - ./client-data:/app
 
   server:
     build:
@@ -22,7 +24,15 @@ services:
       - NODE_ENV=production
     networks:
       - backend
+    volumes:
+      - ./server-data:/app
 
 networks:
   backend:
     driver: bridge
+
+volumes:
+  client-data:
+    driver: local # This creates a named volume for the client
+  server-data:
+    driver: local # This creates a named volume for the server
