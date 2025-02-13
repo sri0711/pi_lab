@@ -1,5 +1,5 @@
 # Use arm32v7 Node.js image for Raspberry Pi Zero
-FROM arm32v7/node:14
+FROM arm32v6/node:20
 
 # Set the working directory inside the container
 WORKDIR /app
