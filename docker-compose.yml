@@ -13,7 +13,7 @@ services:
     environment:
       - NODE_SERVER=http://server:3001
     volumes:
-      - ./client-data:/app
+      - ./pi_data:/client
 
   server:
     build:
@@ -25,14 +25,11 @@ services:
     networks:
       - backend
     volumes:
-      - ./server-data:/app
+      - ./pi_data:/server
 
 networks:
   backend:
     driver: bridge
 
 volumes:
-  client-data:
-    driver: local # This creates a named volume for the client
-  server-data:
-    driver: local # This creates a named volume for the server
+  pi_data:
