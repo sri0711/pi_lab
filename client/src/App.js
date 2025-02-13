@@ -1,10 +1,11 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import config from "./Helpers/config";
 
 function App() {
   const [message, setMessage] = useState("");
   const UpdateStateCheck = () => {
-    fetch(process.env.REACT_APP_API_URL).then((data) => {
+    fetch(config.SERVER_URL).then((data) => {
       data.json().then((json) => {
         setMessage(json.data);
       });
