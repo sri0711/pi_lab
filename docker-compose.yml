@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  client:
+    build:
+      context: ./client  # Path to the React app (update this if it's elsewhere)
+    ports:
+      - "80:80"  # Expose port 80 of the React app
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server  # Path to the Node.js Express app (update this if it's elsewhere)
+    ports:
+      - "3001:3001"  # Expose port 5000 for the backend API
+    environment:
+      - NODE_ENV=production
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
