@@ -3,6 +3,8 @@
 # Print a message indicating the start of the deployment process
 echo "Starting deployment process..."
 
+# step 0: change to the deployment directory
+echo "changing deployment directory..."
 cd ~/pi_lab
 
 # Step 1: Stop and remove old containers
