@@ -1,5 +1,5 @@
 # Use arm32v7 Node.js image for Raspberry Pi Zero
-FROM arm32v6/node:20 as build
+FROM arm32v6/node:iron-alpine as build
 
 # Set the working directory
 WORKDIR /app
