@@ -8,6 +8,8 @@ services:
       - "80:80"  # Expose port 80 of the React app
     depends_on:
       - server
+    environment:
+      - REACT_APP_API_URL=http://server:3001
 
   server:
     build:

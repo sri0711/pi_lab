@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [message, setMessage] = useState("");
   const UpdateStateCheck = () => {
-    fetch("http://server:3001").then((data) => {
+    fetch(process.env.REACT_APP_API_URL).then((data) => {
       data.json().then((json) => {
         setMessage(json.data);
       });
