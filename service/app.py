@@ -1,4 +1,4 @@
-import socketio
+import socketio # type: ignore
 import subprocess
 
 # Connect to the server
@@ -12,7 +12,6 @@ def connect():
 # Event: when the server sends a message to the client
 @sio.event
 def message(data):
-    print(f"Message from server: {data}")
     
     # Ensure that the data is passed as a list
     try:

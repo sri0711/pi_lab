@@ -38,3 +38,6 @@ __pycache__/
 # Pipenv files
 Pipfile.lock
 */pi_lab_env
+
+*/*.env*
+devNotes.md
