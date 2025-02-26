@@ -7,7 +7,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
-    "react-terminal-ui": "^1.4.0"
+    "react-terminal-ui": "^1.4.0",
+    "socket.io-client": "^4.8.1",
+    "@xterm/xterm": "^5.5.0",
+    "xterm-addon-fit": "^0.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

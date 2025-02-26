@@ -3,7 +3,11 @@ const App = Express();
 const Morgan = require("morgan");
 const Cors = require("cors");
 const server = require("http").createServer(App);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*", // Allow all origins
+  },
+});
 _SOCKET = null;
 
 App.use(Express.json());
@@ -27,6 +31,15 @@ io.on("connection", (socket) => {
   // Listen for messages from the client
   socket.on("clientMessage", (data) => {
     console.log(`Message from ${socket.id}: ${data}`);
+  });
+
+  socket.on("terminal", (data) => {
+    console.log("🚀 ~ socket.on ~ data:", data);
+    socket.emit("terminalExecute", data);
+  });
+
+  socket.on("terminal_process", (data) => {
+    socket.emit("terminal_process", data);
   });
 
   // When client disconnects
